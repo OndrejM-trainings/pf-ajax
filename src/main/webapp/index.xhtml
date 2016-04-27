@@ -9,9 +9,15 @@
     <h:body>
         <h:form>
             <p:panelGrid columns="3">
-                <h:commandButton value="#{pageView.akcia  }"/>
-                <h:inputText value="#{pageView.pozdrav}"/>
-            <h:outputText value="#{pageView.pozdrav}"/>
+                <p:commandButton value="#{pageView.akcia}" 
+                                 process="input" update="output" actionListener="#{pageView.pridajX}"/>
+                <p:inputText id="input" value="#{pageView.pozdrav}">
+                    <!--<p:ajax process="input" update="output" event="keyup" listener="#{pageView.pridajVykricnik()}"/>--> 
+                </p:inputText>
+                <p:inputText id="output" value="#{pageView.pozdrav}"/>
+                <p:autoComplete value="#{pageView.pozdravy}" completeMethod="#{pageView.moznosti}" multiple="true">
+                    <p:ajax event="itemSelect" update="@form"/>
+                </p:autoComplete> 
             </p:panelGrid>
         
             </h:form>
